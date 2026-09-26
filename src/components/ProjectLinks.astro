@@ -1,0 +1,48 @@
+---
+import type { ProjectLinks as ProjectLinksType } from "@/data/types";
+
+interface Props {
+  links: ProjectLinksType;
+  compact?: boolean;
+}
+
+const { links, compact = false } = Astro.props;
+
+const buttons = [
+  { key: "live", label: "Live demo", url: links.live },
+  { key: "github", label: "GitHub", url: links.github },
+  { key: "paper", label: "Paper", url: links.paper },
+  { key: "notebook", label: "Notebook", url: links.notebook },
+  { key: "video", label: "Video", url: links.video },
+  ...(links.additional ?? []).map((a: { label: string; url: string }) => ({ key: a.label, label: a.label, url: a.url })),
+].filter((b) => !!b.url);
+
+const size = compact ? "px-3 py-1.5 text-xs" : "px-4 py-2 text-sm";
+---
+
+{
+  (buttons.length > 0 || links.accessNote) && (
+    <div class="flex flex-col gap-3">
+      {buttons.length > 0 && (
+        <div class="flex flex-wrap gap-3">
+          {buttons.map((b) => (
+            <a
+              href={b.url as string}
+              target="_blank"
+              rel="noopener noreferrer"
+              class={`inline-flex items-center gap-2 ${size} text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-[var(--white-icon-tr)] rounded-full bg-[#1414149c] hover:bg-[var(--white-icon-tr)]`}
+            >
+              <span>{b.label}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3.5">
+                <path d="M16.0037 9.41421L7.39712 18.0208L5.98291 16.6066L14.5895 8H7.00373V6H18.0037V17H16.0037V9.41421Z" />
+              </svg>
+            </a>
+          ))}
+        </div>
+      )}
+      {links.accessNote && (
+        <p class="text-xs text-[var(--white-icon)] italic">{links.accessNote}</p>
+      )}
+    </div>
+  )
+}

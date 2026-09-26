@@ -1,0 +1,73 @@
+---
+import type { Project } from "@/data/types";
+import TagList from "./TagList.astro";
+import EmptyVisualFallback from "./EmptyVisualFallback.astro";
+import { resolveImage } from "@/utils/images";
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const thumb = resolveImage(project.images.thumbnail ?? project.images.hero);
+const metrics = project.outcomes.slice(0, 2);
+---
+
+<a
+  href={`/projects/${project.slug}`}
+  class="group block h-full project-card"
+  data-slug={project.slug}
+  data-categories={project.category.join("|")}
+  data-featured={project.featured ? "true" : "false"}
+>
+  <div
+    class="flex flex-col h-full rounded-2xl overflow-hidden border border-[var(--white-icon-tr)] bg-[#1414149c] hover:border-[var(--white-icon)] transition-colors duration-300"
+  >
+    <div class="aspect-[16/10] w-full overflow-hidden">
+      {
+        thumb ? (
+          <img
+            src={thumb}
+            alt={`${project.name} thumbnail`}
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            loading="lazy"
+          />
+        ) : (
+          <EmptyVisualFallback label={project.name} class="rounded-none border-0" />
+        )
+      }
+    </div>
+
+    <div class="flex flex-col flex-grow p-5 gap-3">
+      <div class="flex items-start justify-between gap-2">
+        <h4 class="text-xl font-semibold text-[var(--white)] leading-tight">{project.name}</h4>
+        {
+          (project.links.github || project.links.paper) && (
+            <span class="shrink-0 mt-1 text-[var(--white-icon)]" aria-hidden="true">
+              {project.links.github ? (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                  <path d="M12.001 2C6.47598 2 2.00098 6.475 2.00098 12C2.00098 16.425 4.86348 20.1625 8.83848 21.4875C9.33848 21.575 9.52598 21.275 9.52598 21.0125C9.52598 20.775 9.51348 19.9875 9.51348 19.15C7.00098 19.6125 6.35098 18.5375 6.15098 17.975C6.03848 17.6875 5.55098 16.8 5.12598 16.5625C4.77598 16.375 4.27598 15.9125 5.11348 15.9C5.90098 15.8875 6.46348 16.625 6.65098 16.925C7.55098 18.4375 8.98848 18.0125 9.56348 17.75C9.65098 17.1 9.91348 16.6625 10.201 16.4125C7.97598 16.1625 5.65098 15.3 5.65098 11.475C5.65098 10.3875 6.03848 9.4875 6.67598 8.7875C6.57598 8.5375 6.22598 7.5125 6.77598 6.1375C6.77598 6.1375 7.61348 5.875 9.52598 7.1625C10.326 6.9375 11.176 6.825 12.026 6.825C12.876 6.825 13.726 6.9375 14.526 7.1625C16.4385 5.8625 17.276 6.1375 17.276 6.1375C17.826 7.5125 17.476 8.5375 17.376 8.7875C18.0135 9.4875 18.401 10.375 18.401 11.475C18.401 15.3125 16.0635 16.1625 13.8385 16.4125C14.201 16.725 14.5135 17.325 14.5135 18.2625C14.5135 19.6 14.501 20.675 14.501 21.0125C14.501 21.275 14.6885 21.5875 15.1885 21.4875C19.259 20.1133 21.9999 16.2963 22.001 12C22.001 6.475 17.526 2 12.001 2Z" />
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                  <path d="M12 3C17.5228 3 22 6.58172 22 11C22 15.4183 17.5228 19 12 19C10.7085 19.0028 9.42722 18.8054 8.19827 18.4147C6.99742 19.2148 5.57621 19.6425 4.12318 19.641C3.94742 19.641 3.79141 19.5285 3.7357 19.361C3.68 19.1935 3.7377 19.0092 3.87977 18.9037C4.34718 18.556 5.10658 17.8517 5.50318 16.9077C4.55618 15.9075 4 14.4817 4 11C4 6.58172 8.47715 3 14 3H12ZM12 5C8.13401 5 5 7.68629 5 11C5 13.7383 5.36 14.8 6.0968 15.5468L6.52432 15.9782L6.29932 16.5348C6.14304 16.9188 5.90494 17.2907 5.62726 17.6217C6.13072 17.4457 6.62111 17.2124 7.08289 16.926L7.50079 16.6693L7.96432 16.8113C9.08986 17.1553 10.5397 17.0028 12 17C15.866 17 20 14.3137 20 11C20 7.68629 15.866 5 12 5Z" />
+                </svg>
+              )}
+            </span>
+          )
+        }
+      </div>
+
+      <p class="text-sm text-[var(--white-icon)] flex-grow">{project.shortDescription}</p>
+
+      <TagList tags={project.stack} limit={5} />
+
+      <div class="flex items-center justify-between pt-2 mt-auto border-t border-[var(--white-icon-tr)]">
+        <span class="text-xs text-[var(--sec)]">{project.status}</span>
+        {metrics.length > 0 && (
+          <span class="text-xs text-[var(--white-icon)] text-right">{metrics[0]}</span>
+        )}
+      </div>
+    </div>
+  </div>
+</a>

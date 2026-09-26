@@ -1,0 +1,53 @@
+---
+import type { Publication } from "@/data/types";
+import TagList from "./TagList.astro";
+import { getProjectBySlug } from "@/data/projects";
+
+interface Props {
+  publication: Publication;
+}
+
+const { publication } = Astro.props;
+const relatedProject = publication.relatedProjectSlug ? getProjectBySlug(publication.relatedProjectSlug) : undefined;
+const tags = publication.models ?? publication.technologies ?? [];
+---
+
+<article class="flex flex-col gap-3 p-6 rounded-2xl border border-[var(--white-icon-tr)] bg-[#1414149c]">
+  <div class="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1">
+    <h4 class="text-lg font-semibold text-[var(--white)]">{publication.title}</h4>
+    <span class="text-xs text-[var(--sec)] shrink-0">{publication.status}</span>
+  </div>
+
+  <p class="text-sm text-[var(--white-icon)]">{publication.venue}</p>
+
+  {publication.result && <p class="text-sm text-[var(--white)]">{publication.result}</p>}
+
+  {tags.length > 0 && <TagList tags={tags} />}
+
+  <div class="flex flex-wrap items-center gap-4 pt-2 border-t border-[var(--white-icon-tr)]">
+    {
+      publication.paperUrl ? (
+        <a
+          href={publication.paperUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-sm text-[var(--white-icon)] hover:text-white underline underline-offset-4 transition"
+        >
+          Read paper
+        </a>
+      ) : (
+        <span class="text-xs text-[var(--white-icon)] italic">Manuscript not public</span>
+      )
+    }
+    {
+      relatedProject && (
+        <a
+          href={`/projects/${relatedProject.slug}`}
+          class="text-sm text-[var(--white-icon)] hover:text-white underline underline-offset-4 transition"
+        >
+          View related project
+        </a>
+      )
+    }
+  </div>
+</article>

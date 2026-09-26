@@ -1,0 +1,29 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Nav from "@/components/nav.astro";
+import Footer from "@/components/footer.astro";
+import SectionHeader from "@/components/SectionHeader.astro";
+import ExperienceTimeline from "@/components/ExperienceTimeline.astro";
+import { experience } from "@/data/experience";
+---
+
+<Layout
+  title="Experience"
+  description="Research and engineering experience across academia, startups, and internships — Aashish Vinod Arulbabu."
+>
+  <Nav />
+
+  <section class="pt-28 md:pt-40 pb-16 text-[var(--white)]">
+    <div class="max-w-5xl mx-auto">
+      <SectionHeader
+        eyebrow="Career"
+        title="Experience"
+        description="Research and engineering roles across academia, startups, and industry internships."
+      />
+
+      <ExperienceTimeline entries={experience} />
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

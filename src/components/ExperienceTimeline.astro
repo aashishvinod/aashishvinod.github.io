@@ -1,0 +1,25 @@
+---
+import type { ExperienceEntry } from "@/data/types";
+import ExperienceCard from "./ExperienceCard.astro";
+
+interface Props {
+  entries: ExperienceEntry[];
+}
+
+const { entries } = Astro.props;
+---
+
+<div class="relative flex flex-col gap-8 md:pl-8">
+  <div class="hidden md:block absolute left-0 top-2 bottom-2 w-px bg-[var(--white-icon-tr)]" aria-hidden="true"></div>
+  {
+    entries.map((entry: ExperienceEntry) => (
+      <div class="relative">
+        <span
+          class="hidden md:block absolute -left-8 top-6 w-2.5 h-2.5 rounded-full bg-[var(--sec)]"
+          aria-hidden="true"
+        />
+        <ExperienceCard entry={entry} />
+      </div>
+    ))
+  }
+</div>

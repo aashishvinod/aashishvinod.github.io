@@ -1,0 +1,24 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Nav from "@/components/nav.astro";
+import Footer from "@/components/footer.astro";
+import SectionHeader from "@/components/SectionHeader.astro";
+import PatentCard from "@/components/PatentCard.astro";
+import { patents } from "@/data/patents";
+---
+
+<Layout title="Patents" description="Filed and published patent applications by Aashish Vinod Arulbabu.">
+  <Nav />
+
+  <section class="pt-28 md:pt-40 pb-16 text-[var(--white)]">
+    <div class="max-w-5xl mx-auto">
+      <SectionHeader eyebrow="Inventions" title="Patents" description="Filed and published patent applications." />
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {patents.map((patent) => <PatentCard patent={patent} />)}
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

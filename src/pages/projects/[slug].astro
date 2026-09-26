@@ -1,0 +1,124 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Nav from "@/components/nav.astro";
+import Footer from "@/components/footer.astro";
+import ProjectHero from "@/components/ProjectHero.astro";
+import ProjectGallery from "@/components/ProjectGallery.astro";
+import RelatedExperience from "@/components/RelatedExperience.astro";
+import RelatedProjects from "@/components/RelatedProjects.astro";
+import { projects, getProjectBySlug } from "@/data/projects";
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const project = getProjectBySlug(slug as string);
+
+if (!project) {
+  return Astro.redirect("/projects");
+}
+---
+
+<Layout title={project.name} description={project.shortDescription}>
+  <Nav />
+
+  <ProjectHero project={project} />
+
+  <section class="pb-16 text-[var(--white)]">
+    <div class="max-w-5xl mx-auto space-y-12">
+      {
+        project.problem && (
+          <div class="space-y-3">
+            <h4 class="text-xl font-semibold">Problem</h4>
+            <p class="text-[var(--white-icon)]">{project.problem}</p>
+          </div>
+        )
+      }
+
+      {
+        project.whatIBuilt.length > 0 && (
+          <div class="space-y-3">
+            <h4 class="text-xl font-semibold">What I built</h4>
+            <ul class="flex flex-col gap-2 text-[var(--white-icon)]">
+              {project.whatIBuilt.map((line) => (
+                <li class="flex gap-2">
+                  <span class="text-[var(--sec)]">•</span>
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+
+      {
+        project.howItWorks.length > 0 && (
+          <div class="space-y-3">
+            <h4 class="text-xl font-semibold">How it works</h4>
+            <ul class="flex flex-col gap-2 text-[var(--white-icon)]">
+              {project.howItWorks.map((line) => (
+                <li class="flex gap-2">
+                  <span class="text-[var(--sec)]">•</span>
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+
+      {
+        project.contribution.length > 0 && (
+          <div class="space-y-3">
+            <h4 class="text-xl font-semibold">My contribution</h4>
+            <ul class="flex flex-col gap-2 text-[var(--white-icon)]">
+              {project.contribution.map((line) => (
+                <li class="flex gap-2">
+                  <span class="text-[var(--sec)]">•</span>
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+
+      {
+        project.outcomes.length > 0 && (
+          <div class="space-y-3">
+            <h4 class="text-xl font-semibold">Outcomes</h4>
+            <ul class="flex flex-col gap-2 text-[var(--white-icon)]">
+              {project.outcomes.map((line) => (
+                <li class="flex gap-2">
+                  <span class="text-[var(--sec)]">•</span>
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+
+      <ProjectGallery gallery={project.images.gallery} />
+
+      <RelatedExperience ids={project.relatedExperience} />
+
+      <RelatedProjects slugs={project.relatedProjects} />
+
+      <a
+        href="/projects"
+        class="inline-flex items-center gap-2 text-sm text-[var(--white-icon)] hover:text-white transition"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
+          <path d="M7.82843 10.9999H20V12.9999H7.82843L13.1924 18.3639L11.7782 19.7781L4 11.9999L11.7782 4.2218L13.1924 5.63601L7.82843 10.9999Z" />
+        </svg>
+        Back to all projects
+      </a>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

@@ -1,0 +1,31 @@
+---
+import type { ProjectGalleryImage } from "@/data/types";
+import { resolveImage } from "@/utils/images";
+
+interface Props {
+  gallery?: ProjectGalleryImage[];
+}
+
+const { gallery = [] } = Astro.props;
+const available = gallery
+  .map((img: ProjectGalleryImage) => ({ ...img, resolved: resolveImage(img.src) }))
+  .filter((img: ProjectGalleryImage & { resolved: string | null }) => img.resolved);
+---
+
+{
+  available.length > 0 && (
+    <div class="space-y-4">
+      <h4 class="text-xl font-semibold text-[var(--white)]">Gallery</h4>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {available.map((img: ProjectGalleryImage & { resolved: string | null }) => (
+          <figure class="rounded-2xl overflow-hidden border border-[var(--white-icon-tr)]">
+            <img src={img.resolved as string} alt={img.alt} class="w-full h-full object-cover" loading="lazy" />
+            {img.caption && (
+              <figcaption class="px-4 py-2 text-xs text-[var(--white-icon)] bg-[#1414149c]">{img.caption}</figcaption>
+            )}
+          </figure>
+        ))}
+      </div>
+    </div>
+  )
+}

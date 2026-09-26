@@ -8,20 +8,42 @@ interface NavItem {
 const navItems: NavItem[] = [
   {
     label: "Home",
-    href: "#home",
+    href: "/",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M21 20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V9.48907C3 9.18048 3.14247 8.88917 3.38606 8.69972L11.3861 2.47749C11.7472 2.19663 12.2528 2.19663 12.6139 2.47749L20.6139 8.69972C20.8575 8.88917 21 9.18048 21 9.48907V20ZM19 19V9.97815L12 4.53371L5 9.97815V19H19Z"></path></svg>`,
   },
   {
     label: "Projects",
-    href: "#projects",
+    href: "/projects",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M4 5V19H20V7H11.5858L9.58579 5H4ZM12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5Z"></path></svg>`,
   },
   {
+    label: "Experience",
+    href: "/experience",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="3" y1="13" x2="21" y2="13"></line></svg>`,
+  },
+  {
+    label: "Research",
+    href: "/research",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6L4 20a1 1 0 0 0 1 2h14a1 1 0 0 0 1-2L15 8V2"></path><line x1="9" y1="2" x2="15" y2="2"></line><line x1="8" y1="14" x2="16" y2="14"></line></svg>`,
+  },
+  {
+    label: "Patents",
+    href: "/patents",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"></circle><path d="M8.5 13.5L7 22l5-3 5 3-1.5-8.5"></path></svg>`,
+  },
+  {
     label: "Contact",
-    href: "#contact",
+    href: "/#contact",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M21.7267 2.95694L16.2734 22.0432C16.1225 22.5716 15.7979 22.5956 15.5563 22.1126L11 13L1.9229 9.36919C1.41322 9.16532 1.41953 8.86022 1.95695 8.68108L21.0432 2.31901C21.5716 2.14285 21.8747 2.43866 21.7267 2.95694ZM19.0353 5.09647L6.81221 9.17085L12.4488 11.4255L15.4895 17.5068L19.0353 5.09647Z"></path></svg>`,
   },
 ];
+
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+function isActive(href: string) {
+  if (href === "/") return currentPath === "/";
+  const cleanHref = href.split("#")[0].replace(/\/$/, "");
+  return cleanHref !== "" && currentPath.startsWith(cleanHref);
+}
 ---
 
 <div class="flex justify-center w-full">
@@ -38,7 +60,11 @@ const navItems: NavItem[] = [
             <li class="flex-1 md:flex-none">
               <a
                 href={item.href}
-                class="flex flex-col items-center gap-1 text-[var(--white-icon)] transition-colors text-xs md:text-base relative group"
+                aria-current={isActive(item.href) ? "page" : undefined}
+                class:list={[
+                  "flex flex-col items-center gap-1 text-[var(--white-icon)] transition-colors text-xs md:text-base relative group",
+                  isActive(item.href) && "active",
+                ]}
               >
                 <div class="absolute -left-6 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full transition-all duration-300 scale-0 opacity-0 bg-[#A9FF5B] nav-indicator hidden md:block" />
                 <span class="md:hidden flex items-center justify-center w-6 h-6">
@@ -137,43 +163,16 @@ const navItems: NavItem[] = [
     { passive: true }
   );
 
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  // Smooth-scroll to #contact when already on the homepage instead of a full reload.
+  document.querySelectorAll('a[href="/#contact"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
-      e.preventDefault();
-      const target = e.currentTarget as HTMLAnchorElement;
-      const targetId = target.getAttribute("href")?.substring(1) || "";
-      const targetElement = document.getElementById(targetId);
+      if (window.location.pathname !== "/") return;
+      const targetElement = document.getElementById("contact");
       if (targetElement) {
-        targetElement.scrollIntoView({
-          behavior: "smooth",
-        });
+        e.preventDefault();
+        targetElement.scrollIntoView({ behavior: "smooth" });
       }
     });
-  });
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const sections = document.querySelectorAll("section[id]");
-    const navLinks = document.querySelectorAll("nav a[href^='#']");
-    const observerOptions = { threshold: 0.6 };
-
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          navLinks.forEach((link) => link.classList.remove("active"));
-          const id = entry.target.getAttribute("id");
-          const activeLink = document.querySelector(`nav a[href="#${id}"]`);
-          if (activeLink) {
-            activeLink.classList.add("active");
-          }
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(
-      observerCallback,
-      observerOptions
-    );
-    sections.forEach((section) => observer.observe(section));
   });
 </script>
 

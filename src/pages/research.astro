@@ -1,0 +1,82 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Nav from "@/components/nav.astro";
+import Footer from "@/components/footer.astro";
+import SectionHeader from "@/components/SectionHeader.astro";
+import PublicationCard from "@/components/PublicationCard.astro";
+import TagList from "@/components/TagList.astro";
+import { publications, activeResearch } from "@/data/research";
+
+const published = publications.filter((p) => p.status === "Published");
+const underReview = publications.filter((p) => p.status !== "Published");
+---
+
+<Layout
+  title="Research"
+  description="Published papers, manuscripts under review, and active research by Aashish Vinod Arulbabu."
+>
+  <Nav />
+
+  <section class="pt-28 md:pt-40 pb-16 text-[var(--white)]">
+    <div class="max-w-5xl mx-auto space-y-16">
+      <SectionHeader
+        eyebrow="Publications"
+        title="Research"
+        description="Published papers, manuscripts under review, and active research tracks in machine learning and applied AI."
+      />
+
+      <div class="space-y-6">
+        <h4 class="text-2xl font-medium">Published</h4>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {published.map((pub) => <PublicationCard publication={pub} />)}
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <h4 class="text-2xl font-medium">Under review / revision</h4>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {underReview.map((pub) => <PublicationCard publication={pub} />)}
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <h4 class="text-2xl font-medium">Active research</h4>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {
+            activeResearch.map((item) => (
+              <article class="flex flex-col gap-3 p-6 rounded-2xl border border-[var(--white-icon-tr)] bg-[#1414149c]">
+                <div class="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1">
+                  <h5 class="text-lg font-semibold text-[var(--white)]">{item.name}</h5>
+                  <span class="text-xs text-[var(--sec)] shrink-0">{item.status}</span>
+                </div>
+                <p class="text-sm text-[var(--white-icon)]">{item.tagline}</p>
+                {item.summary && <p class="text-sm text-[var(--white-icon)]">{item.summary}</p>}
+                {item.criteria && item.criteria.length > 0 && (
+                  <ul class="flex flex-col gap-2 text-sm text-[var(--white-icon)]">
+                    {item.criteria.map((c) => (
+                      <li class="flex gap-2">
+                        <span class="text-[var(--sec)]">•</span>
+                        <span>{c}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {item.stack && item.stack.length > 0 && <TagList tags={item.stack} />}
+                {item.relatedProjectSlug && (
+                  <a
+                    href={`/projects/${item.relatedProjectSlug}`}
+                    class="text-sm text-[var(--white-icon)] hover:text-white underline underline-offset-4 transition pt-2 border-t border-[var(--white-icon-tr)]"
+                  >
+                    View related project
+                  </a>
+                )}
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

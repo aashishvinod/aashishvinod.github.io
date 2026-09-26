@@ -1,0 +1,23 @@
+---
+import { getProjectBySlug } from "@/data/projects";
+import type { Project } from "@/data/types";
+import ProjectGrid from "./ProjectGrid.astro";
+
+interface Props {
+  slugs?: string[];
+}
+
+const { slugs = [] } = Astro.props;
+const related: Project[] = slugs
+  .map((slug: string) => getProjectBySlug(slug))
+  .filter((p: Project | undefined): p is Project => !!p);
+---
+
+{
+  related.length > 0 && (
+    <div class="space-y-4">
+      <h4 class="text-xl font-semibold text-[var(--white)]">Related projects</h4>
+      <ProjectGrid projects={related} />
+    </div>
+  )
+}

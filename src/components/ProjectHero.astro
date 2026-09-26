@@ -1,0 +1,50 @@
+---
+import type { Project } from "@/data/types";
+import TagList from "./TagList.astro";
+import ProjectLinks from "./ProjectLinks.astro";
+import EmptyVisualFallback from "./EmptyVisualFallback.astro";
+import { resolveImage } from "@/utils/images";
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const hero = resolveImage(project.images.hero);
+
+const meta = [project.status, project.year, project.role, project.organization].filter(Boolean);
+---
+
+<section class="pt-28 md:pt-40 pb-8 text-[var(--white)]">
+  <div class="max-w-5xl mx-auto space-y-6">
+    <a
+      href="/projects"
+      class="inline-flex items-center gap-2 text-sm text-[var(--white-icon)] hover:text-white transition"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
+        <path d="M7.82843 10.9999H20V12.9999H7.82843L13.1924 18.3639L11.7782 19.7781L4 11.9999L11.7782 4.2218L13.1924 5.63601L7.82843 10.9999Z" />
+      </svg>
+      Back to projects
+    </a>
+
+    <div class="aspect-[21/9] w-full rounded-2xl overflow-hidden">
+      {
+        hero ? (
+          <img src={hero} alt={`${project.name} hero image`} class="w-full h-full object-cover" />
+        ) : (
+          <EmptyVisualFallback label={project.name} />
+        )
+      }
+    </div>
+
+    <div class="space-y-3">
+      <h1 class="text-4xl md:text-5xl font-medium">{project.name}</h1>
+      <p class="text-lg md:text-xl text-[var(--white-icon)]">{project.tagline}</p>
+      <p class="text-sm text-[var(--white-icon)]">{meta.join(" · ")}</p>
+    </div>
+
+    <TagList tags={project.stack} size="md" />
+
+    <ProjectLinks links={project.links} />
+  </div>
+</section>

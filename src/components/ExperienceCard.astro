@@ -1,0 +1,62 @@
+---
+import type { ExperienceEntry, Project } from "@/data/types";
+import TagList from "./TagList.astro";
+import { getProjectBySlug } from "@/data/projects";
+
+interface Props {
+  entry: ExperienceEntry;
+}
+
+const { entry } = Astro.props;
+const related: Project[] = (entry.relatedProjects ?? [])
+  .map((slug: string) => getProjectBySlug(slug))
+  .filter((p: Project | undefined): p is Project => !!p);
+---
+
+<article
+  id={entry.id}
+  class="scroll-mt-32 flex flex-col gap-4 p-6 rounded-2xl border border-[var(--white-icon-tr)] bg-[#1414149c]"
+>
+  <div class="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1">
+    <div>
+      <h4 class="text-xl font-semibold text-[var(--white)]">{entry.role}</h4>
+      <p class="text-[var(--sec)]">{entry.organization}</p>
+    </div>
+    <p class="text-sm text-[var(--white-icon)] shrink-0">
+      {entry.dates}
+      {entry.location && ` · ${entry.location}`}
+    </p>
+  </div>
+
+  <p class="text-sm text-[var(--white-icon)]">{entry.summary}</p>
+
+  {
+    entry.highlights.length > 0 && (
+      <ul class="flex flex-col gap-2 text-sm text-[var(--white-icon)]">
+        {entry.highlights.map((h: string) => (
+          <li class="flex gap-2">
+            <span class="text-[var(--sec)]">•</span>
+            <span>{h}</span>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  {entry.technologies.length > 0 && <TagList tags={entry.technologies} />}
+
+  {
+    related.length > 0 && (
+      <div class="flex flex-wrap gap-3 pt-2 border-t border-[var(--white-icon-tr)]">
+        {related.map((project: Project) => (
+          <a
+            href={`/projects/${project.slug}`}
+            class="text-sm text-[var(--white-icon)] hover:text-white underline underline-offset-4 transition"
+          >
+            {project.name}
+          </a>
+        ))}
+      </div>
+    )
+  }
+</article>

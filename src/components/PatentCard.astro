@@ -1,0 +1,19 @@
+---
+import type { Patent } from "@/data/types";
+
+interface Props {
+  patent: Patent;
+}
+
+const { patent } = Astro.props;
+---
+
+<article class="flex flex-col gap-3 p-6 rounded-2xl border border-[var(--white-icon-tr)] bg-[#1414149c]">
+  <div class="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1">
+    <h4 class="text-lg font-semibold text-[var(--white)]">{patent.name}</h4>
+    <span class="text-xs text-[var(--sec)] shrink-0">{patent.status}</span>
+  </div>
+  <p class="text-sm text-[var(--white-icon)]">Application {patent.applicationNumber}</p>
+  <p class="text-sm text-[var(--white-icon)]">{patent.dateLabel}: {patent.date}</p>
+  <p class="text-sm text-[var(--white)]">{patent.description}</p>
+</article>

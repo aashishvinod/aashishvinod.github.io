@@ -1,0 +1,101 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Nav from "@/components/nav.astro";
+import Footer from "@/components/footer.astro";
+import SectionHeader from "@/components/SectionHeader.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+import { projects } from "@/data/projects";
+
+const filters = [
+  "All",
+  "Featured",
+  "Artificial Intelligence",
+  "Machine Learning",
+  "Data Engineering",
+  "Cloud",
+  "Research",
+  "Healthcare",
+  "FinTech",
+  "Computer Vision",
+  "Mobile",
+  "Automation",
+];
+---
+
+<Layout
+  title="Projects"
+  description="Machine learning, data engineering, and applied AI projects by Aashish Vinod Arulbabu."
+>
+  <Nav />
+
+  <section class="pt-28 md:pt-40 pb-12 text-[var(--white)]">
+    <div class="max-w-5xl mx-auto">
+      <SectionHeader
+        eyebrow="All work"
+        title="Projects"
+        description="Machine learning, data engineering, and applied AI projects spanning research, internships, and independent product work."
+      />
+
+      <div class="flex flex-wrap gap-2 mb-8" role="group" aria-label="Filter projects by category">
+        {
+          filters.map((filter, i) => (
+            <button
+              type="button"
+              class="filter-btn text-sm px-4 py-2 rounded-full border border-[var(--white-icon-tr)] text-[var(--white-icon)] hover:text-white hover:border-[var(--white-icon)] transition data-[active=true]:bg-[var(--sec)] data-[active=true]:text-[var(--background)] data-[active=true]:border-[var(--sec)]"
+              data-filter={filter}
+              data-active={i === 0 ? "true" : "false"}
+            >
+              {filter}
+            </button>
+          ))
+        }
+      </div>
+
+      <div id="project-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {projects.map((project) => <ProjectCard project={project} />)}
+      </div>
+
+      <p id="no-results" class="hidden text-center text-[var(--white-icon)] py-16">
+        No projects match this filter yet.
+      </p>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
+  const cards = document.querySelectorAll<HTMLAnchorElement>(".project-card");
+  const noResults = document.getElementById("no-results");
+
+  function applyFilter(filter: string) {
+    let visibleCount = 0;
+
+    cards.forEach((card) => {
+      const categories = (card.dataset.categories ?? "").toLowerCase().split("|");
+      const featured = card.dataset.featured === "true";
+
+      let match = true;
+      if (filter === "Featured") {
+        match = featured;
+      } else if (filter !== "All") {
+        const target = filter.toLowerCase();
+        match = categories.some((c) => c.includes(target));
+      }
+
+      card.classList.toggle("hidden", !match);
+      if (match) visibleCount++;
+    });
+
+    noResults?.classList.toggle("hidden", visibleCount > 0);
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      buttons.forEach((b) => (b.dataset.active = "false"));
+      button.dataset.active = "true";
+      applyFilter(button.dataset.filter ?? "All");
+    });
+  });
+</script>

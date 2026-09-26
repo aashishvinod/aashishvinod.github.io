@@ -1,0 +1,25 @@
+---
+interface Props {
+  tags: string[];
+  limit?: number;
+  size?: "sm" | "md";
+}
+
+const { tags, limit, size = "sm" } = Astro.props;
+const visible = limit ? tags.slice(0, limit) : tags;
+const textSize = size === "md" ? "text-sm" : "text-xs";
+---
+
+{
+  visible.length > 0 && (
+    <ul class="flex flex-wrap gap-2">
+      {visible.map((tag: string) => (
+        <li
+          class={`${textSize} text-[var(--white-icon)] border border-[var(--white-icon-tr)] rounded-full px-3 py-1 bg-[#1414149c]`}
+        >
+          {tag}
+        </li>
+      ))}
+    </ul>
+  )
+}
