@@ -50,13 +50,13 @@ export const experience: ExperienceEntry[] = [
     role: "Forward Deployed Engineer and Co-Founder",
     dates: "December 2025 – March 2026",
     summary:
-      "Built an agentic multimodal AI platform for competitive intelligence and marketing-video generation.",
-    technologies: ["Python", "FastAPI", "LLMs", "ReAct", "Vision models", "Docker", "GCP"],
+      "Built an agentic AI marketing copilot that studies local competitors' Instagram Reels and turns them into shot-by-shot videos for small businesses.",
+    technologies: ["Python", "FastAPI", "LangGraph", "GPT-4o", "CLIP", "Pinecone", "React", "AWS", "Kubernetes"],
     relatedProjects: ["heatmap-ai"],
     highlights: [
-      "Supported 30 active users.",
+      "Served 40 users from December 2025 to March 2026.",
       "Saved approximately 50 hours per business.",
-      "Kept generation cost under $0.30 per video.",
+      "Built an agentic video pipeline that turns local competitor Reels into five-shot, 15-second marketing videos.",
     ],
   },
   {
