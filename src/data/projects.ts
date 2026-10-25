@@ -694,7 +694,6 @@ export const projects: Project[] = [
         { src: "/projects/algorithmic-trading/performance.png", alt: "Trading efficiency performance chart" },
       ],
     },
-    relatedExperience: ["suiyas"],
   },
   {
     slug: "face-attendance",
@@ -726,7 +725,6 @@ export const projects: Project[] = [
         { src: "/projects/face-attendance/architecture.png", alt: "Attendance system architecture diagram" },
       ],
     },
-    relatedExperience: ["ongc"],
   },
   {
     slug: "selenium-data-extraction",
@@ -757,7 +755,6 @@ export const projects: Project[] = [
         { src: "/projects/selenium-data-extraction/report-output.png", alt: "Automated report output" },
       ],
     },
-    relatedExperience: ["ladwa"],
     relatedProjects: ["finance-management-app"],
   },
   {
@@ -788,7 +785,6 @@ export const projects: Project[] = [
         { src: "/projects/finance-management-app/mobile-flow.png", alt: "Mobile app navigation flow diagram" },
       ],
     },
-    relatedExperience: ["ladwa"],
     relatedProjects: ["selenium-data-extraction"],
   },
 ];
