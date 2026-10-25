@@ -78,8 +78,8 @@ export const projects: Project[] = [
       "v1 is offline to save cost; the v2 video agent runs as a prototype, with next steps to connect real video-generation APIs and add direct photo upload.",
     ],
     images: {
-      hero: "/projects/heatmap-ai/hero.png",
-      thumbnail: "/projects/heatmap-ai/hero.png",
+      hero: "/projects/heatmap-ai/hero.svg",
+      thumbnail: "/projects/heatmap-ai/hero.svg",
       gallery: [
         { src: "/projects/heatmap-ai/workflow.png", alt: "HeatMap agentic workflow diagram" },
         { src: "/projects/heatmap-ai/analysis-output.png", alt: "Structured competitor-media analysis output" },
@@ -165,8 +165,8 @@ export const projects: Project[] = [
       "AWQ 8-bit attention configurations approached BF16 performance.",
     ],
     images: {
-      hero: "/projects/physics-informed-weather/hero.png",
-      thumbnail: "/projects/physics-informed-weather/hero.png",
+      hero: "/projects/physics-informed-weather/hero.svg",
+      thumbnail: "/projects/physics-informed-weather/hero.svg",
       gallery: [
         { src: "/projects/physics-informed-weather/model-pipeline.png", alt: "Model adaptation and evaluation pipeline" },
         { src: "/projects/physics-informed-weather/physics-losses.png", alt: "Physics-informed loss terms diagram" },
@@ -250,8 +250,8 @@ export const projects: Project[] = [
       "Supported 50-state site-selection and business-development analysis.",
     ],
     images: {
-      hero: "/projects/geoprospex/hero.png",
-      thumbnail: "/projects/geoprospex/hero.png",
+      hero: "/projects/geoprospex/hero.svg",
+      thumbnail: "/projects/geoprospex/hero.svg",
       gallery: [
         { src: "/projects/geoprospex/coverage-map.png", alt: "National census-tract and facility coverage map" },
         { src: "/projects/geoprospex/site-comparison.png", alt: "Site-comparison decision view" },
@@ -318,8 +318,8 @@ export const projects: Project[] = [
       "Reduced manual preparation by approximately 46%.",
     ],
     images: {
-      hero: "/projects/financial-data-platform/hero.png",
-      thumbnail: "/projects/financial-data-platform/hero.png",
+      hero: "/projects/financial-data-platform/hero.svg",
+      thumbnail: "/projects/financial-data-platform/hero.svg",
       gallery: [
         { src: "/projects/financial-data-platform/aws-architecture.png", alt: "AWS data-platform architecture diagram" },
         { src: "/projects/financial-data-platform/etl-workflow.png", alt: "ETL workflow diagram" },
@@ -380,8 +380,8 @@ export const projects: Project[] = [
       "Reduced processing latency by 38% through micro-batch optimization.",
     ],
     images: {
-      hero: "/projects/realtime-sentiment/hero.png",
-      thumbnail: "/projects/realtime-sentiment/hero.png",
+      hero: "/projects/realtime-sentiment/hero.svg",
+      thumbnail: "/projects/realtime-sentiment/hero.svg",
       gallery: [
         { src: "/projects/realtime-sentiment/streaming-architecture.png", alt: "Kafka and Spark streaming architecture diagram" },
         { src: "/projects/realtime-sentiment/dashboard.png", alt: "Real-time sentiment monitoring dashboard" },
@@ -439,8 +439,8 @@ export const projects: Project[] = [
       "Demonstrated practical AI product judgment and responsible automation.",
     ],
     images: {
-      hero: "/projects/prior-authorization-assistant/hero.png",
-      thumbnail: "/projects/prior-authorization-assistant/hero.png",
+      hero: "/projects/prior-authorization-assistant/hero.svg",
+      thumbnail: "/projects/prior-authorization-assistant/hero.svg",
       gallery: [
         { src: "/projects/prior-authorization-assistant/input-screen.png", alt: "Case-information input screen" },
         { src: "/projects/prior-authorization-assistant/criteria-checklist.png", alt: "Policy-criteria checklist output" },
@@ -485,8 +485,8 @@ export const projects: Project[] = [
     ],
     outcomes: ["Covered 30 countries.", "Achieved R² = 0.83 with Random Forest.", "Produced interpretable climate and agricultural trend analysis."],
     images: {
-      hero: "/projects/climate-agriculture-forecasting/hero.png",
-      thumbnail: "/projects/climate-agriculture-forecasting/hero.png",
+      hero: "/projects/climate-agriculture-forecasting/hero.svg",
+      thumbnail: "/projects/climate-agriculture-forecasting/hero.svg",
       gallery: [
         { src: "/projects/climate-agriculture-forecasting/country-map.png", alt: "Coverage map of the 30 countries analyzed" },
         { src: "/projects/climate-agriculture-forecasting/feature-analysis.png", alt: "Climate feature importance analysis" },
@@ -522,8 +522,8 @@ export const projects: Project[] = [
     contribution: ["Worked on model architecture, distributed training workflow, evaluation, and technical documentation."],
     outcomes: [],
     images: {
-      hero: "/projects/federated-fraud-detection/hero.png",
-      thumbnail: "/projects/federated-fraud-detection/hero.png",
+      hero: "/projects/federated-fraud-detection/hero.svg",
+      thumbnail: "/projects/federated-fraud-detection/hero.svg",
       gallery: [
         { src: "/projects/federated-fraud-detection/federated-architecture.png", alt: "Federated learning architecture diagram" },
         { src: "/projects/federated-fraud-detection/training-flow.png", alt: "Distributed training flow diagram" },
@@ -557,8 +557,8 @@ export const projects: Project[] = [
       "Submitted to IEEE Access and received minor revision status.",
     ],
     images: {
-      hero: "/projects/multimodal-biometrics/hero.png",
-      thumbnail: "/projects/multimodal-biometrics/hero.png",
+      hero: "/projects/multimodal-biometrics/hero.svg",
+      thumbnail: "/projects/multimodal-biometrics/hero.svg",
       gallery: [
         { src: "/projects/multimodal-biometrics/fusion-architecture.png", alt: "Multimodal fusion architecture diagram" },
         { src: "/projects/multimodal-biometrics/modality-workflow.png", alt: "Face, voice, and signature modality workflow" },
@@ -591,8 +591,8 @@ export const projects: Project[] = [
     contribution: [],
     outcomes: ["Achieved approximately 90% accuracy.", "Published at IEEE WCONF 2024."],
     images: {
-      hero: "/projects/autism-ensemble-detection/hero.png",
-      thumbnail: "/projects/autism-ensemble-detection/hero.png",
+      hero: "/projects/autism-ensemble-detection/hero.svg",
+      thumbnail: "/projects/autism-ensemble-detection/hero.svg",
       gallery: [
         { src: "/projects/autism-ensemble-detection/ensemble-architecture.png", alt: "Ensemble transfer-learning architecture diagram" },
         { src: "/projects/autism-ensemble-detection/model-comparison.png", alt: "Backbone model comparison chart" },
@@ -624,8 +624,8 @@ export const projects: Project[] = [
     contribution: [],
     outcomes: ["Achieved 89.63% accuracy.", "Published at IEEE NMITCON 2024."],
     images: {
-      hero: "/projects/clinical-disease-ensemble/hero.png",
-      thumbnail: "/projects/clinical-disease-ensemble/hero.png",
+      hero: "/projects/clinical-disease-ensemble/hero.svg",
+      thumbnail: "/projects/clinical-disease-ensemble/hero.svg",
       gallery: [
         { src: "/projects/clinical-disease-ensemble/ensemble-flow.png", alt: "Stacked ensemble flow diagram" },
         { src: "/projects/clinical-disease-ensemble/model-comparison.png", alt: "Base-model comparison chart" },
@@ -654,8 +654,8 @@ export const projects: Project[] = [
     contribution: [],
     outcomes: [],
     images: {
-      hero: "/projects/heart-disease-alerting/hero.png",
-      thumbnail: "/projects/heart-disease-alerting/hero.png",
+      hero: "/projects/heart-disease-alerting/hero.svg",
+      thumbnail: "/projects/heart-disease-alerting/hero.svg",
       gallery: [
         { src: "/projects/heart-disease-alerting/input-features.png", alt: "Patient health-indicator input features" },
         { src: "/projects/heart-disease-alerting/model-workflow.png", alt: "Prediction and alerting workflow diagram" },
@@ -685,8 +685,8 @@ export const projects: Project[] = [
     contribution: [],
     outcomes: ["Improved operational efficiency by approximately 20%.", "Created reusable market-monitoring and trading components."],
     images: {
-      hero: "/projects/algorithmic-trading/hero.png",
-      thumbnail: "/projects/algorithmic-trading/hero.png",
+      hero: "/projects/algorithmic-trading/hero.svg",
+      thumbnail: "/projects/algorithmic-trading/hero.svg",
       gallery: [
         { src: "/projects/algorithmic-trading/trading-flow.png", alt: "Automated trading workflow diagram" },
         { src: "/projects/algorithmic-trading/signals.png", alt: "Market trend signal chart" },
@@ -717,8 +717,8 @@ export const projects: Project[] = [
     contribution: [],
     outcomes: [],
     images: {
-      hero: "/projects/face-attendance/hero.png",
-      thumbnail: "/projects/face-attendance/hero.png",
+      hero: "/projects/face-attendance/hero.svg",
+      thumbnail: "/projects/face-attendance/hero.svg",
       gallery: [
         { src: "/projects/face-attendance/registration.png", alt: "Facial-recognition registration screen" },
         { src: "/projects/face-attendance/recognition.png", alt: "Facial-recognition matching screen" },
@@ -749,8 +749,8 @@ export const projects: Project[] = [
     contribution: [],
     outcomes: ["Reduced manual verification and reporting effort by approximately 40–45%."],
     images: {
-      hero: "/projects/selenium-data-extraction/hero.png",
-      thumbnail: "/projects/selenium-data-extraction/hero.png",
+      hero: "/projects/selenium-data-extraction/hero.svg",
+      thumbnail: "/projects/selenium-data-extraction/hero.svg",
       gallery: [
         { src: "/projects/selenium-data-extraction/extraction-flow.png", alt: "Browser-automation extraction flow diagram" },
         { src: "/projects/selenium-data-extraction/validation.png", alt: "Data validation step" },
@@ -779,8 +779,8 @@ export const projects: Project[] = [
     contribution: [],
     outcomes: [],
     images: {
-      hero: "/projects/finance-management-app/hero.png",
-      thumbnail: "/projects/finance-management-app/hero.png",
+      hero: "/projects/finance-management-app/hero.svg",
+      thumbnail: "/projects/finance-management-app/hero.svg",
       gallery: [
         { src: "/projects/finance-management-app/dashboard.png", alt: "Finance app dashboard screen" },
         { src: "/projects/finance-management-app/transactions.png", alt: "Transactions list screen" },

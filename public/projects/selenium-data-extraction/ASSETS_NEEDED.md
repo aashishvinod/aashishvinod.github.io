@@ -5,7 +5,7 @@ exist in this directory, so the site renders the neutral fallback treatment
 instead of a broken image. Add real files here (matching filenames) to have
 them appear automatically — no code changes required.
 
-- [ ] hero.png
+- [x] hero.svg — generated cover image, matches site style (done)
 - [ ] extraction-flow.png
 - [ ] validation.png
 - [ ] report-output.png
