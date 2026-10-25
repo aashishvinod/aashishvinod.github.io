@@ -19,6 +19,17 @@ export const experience: ExperienceEntry[] = [
     ],
   },
   {
+    id: "umd-promise",
+    organization: "UMD PROMISE",
+    role: "Technology Staff Lead",
+    dates: "August 2026 – Present",
+    summary:
+      "Supports event technology, equipment setup, recording, photography, file handling, and technical operations.",
+    technologies: [],
+    relatedProjects: [],
+    highlights: [],
+  },
+  {
     id: "geoprospex",
     organization: "GeoProspex.ai",
     role: "Data Science Intern",
@@ -106,17 +117,6 @@ export const experience: ExperienceEntry[] = [
     summary: "Developed a CNN-based mobile facial-recognition attendance workflow.",
     technologies: ["CNNs", "Facial recognition", "Android Studio"],
     relatedProjects: ["face-attendance"],
-    highlights: [],
-  },
-  {
-    id: "umd-promise",
-    organization: "UMD PROMISE",
-    role: "Technology Staff Lead",
-    dates: "August 2026 – Present",
-    summary:
-      "Supports event technology, equipment setup, recording, photography, file handling, and technical operations.",
-    technologies: [],
-    relatedProjects: [],
     highlights: [],
   },
 ];
